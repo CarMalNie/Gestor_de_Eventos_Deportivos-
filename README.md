@@ -39,5 +39,3 @@ Implementar las instrucciones if, for, while, y las sentencias break y continue 
 Ejecución
 
 Trabajo grupal, en el que cada miembro se encargará de una parte del sistema.
-
-Deberán entregar el código fuente en un archivo comprimido ZIP con el nombre "EventoDeportivo_grupoX" (donde X es el número de grupo asignado).
