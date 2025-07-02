@@ -4,7 +4,7 @@ import uuid # Para generar IDs únicos para eventos y usuarios
 class Usuario:
     """Representa a un participante del evento."""
     def __init__(self, nombre):
-        self.id_usuario = str(uuid.uuid4())[:4] # ID único de 8 caracteres
+        self.id_usuario = str(uuid.uuid4())[:4] # ID único de 4 caracteres
         self.nombre = nombre
 
     def __repr__(self):
@@ -14,7 +14,7 @@ class Usuario:
 class Evento:
     """Representa un evento deportivo."""
     def __init__(self, nombre, fecha, tipo_evento):
-        self.id_evento = str(uuid.uuid4())[:8]
+        self.id_evento = str(uuid.uuid4())[:4] # ID único de 4 caracteres
         self.nombre = nombre
         self.fecha = fecha
         self.tipo_evento = tipo_evento
