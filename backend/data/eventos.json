@@ -1,0 +1,19 @@
+[
+    {
+        "id_evento": "8890",
+        "nombre": "futbol juvenil",
+        "fecha": "2025-07-03",
+        "tipo_evento": "Fútbol",
+        "estado": "Pendiente",
+        "participantes_inscritos": [
+            "2422",
+            "6049",
+            "8318",
+            "1904",
+            "1366",
+            "7197"
+        ],
+        "participantes_confirmados": [],
+        "equipos": {}
+    }
+]

@@ -1,53 +1,76 @@
-# Gestor_de_Eventos_Deportivos
+# Gestor de Eventos Deportivos
 
+## Descripción General
 
+Este proyecto es una aplicación web diseñada para facilitar la gestión de eventos deportivos. Permite a los usuarios crear eventos, registrar participantes e inscribirlos en diferentes actividades. La aplicación cuenta con un backend desarrollado en Python con FastAPI y un frontend interactivo y responsivo construido con HTML, CSS, JavaScript y Bootstrap.
 
-Un grupo de 3 amigos ha decidido crear una plataforma web para gestionar eventos deportivos en su ciudad. Cada usuario podrá crear eventos deportivos, registrarse para participar en ellos, ver los eventos disponibles, y realizar un seguimiento de su inscripción. Además, los organizadores deben poder confirmar la asistencia de los participantes y asignar equipos para las actividades.
+## Características Principales
 
-A lo largo del desarrollo del sistema, los amigos se dieron cuenta de que necesitan llevar un registro de los eventos creados, los participantes inscritos, y el estado de los eventos (confirmado, en proceso, cancelado). Además, deben poder asignar y consultar equipos para cada evento.
+- **Gestión de Eventos**: Crear, ver y filtrar eventos por estado (Pendiente, Confirmado, etc.).
+- **Gestión de Usuarios**: Registrar nuevos usuarios en el sistema.
+- **Inscripciones**: Inscribir usuarios en los eventos desde una interfaz modal detallada.
+- **Asignación de Equipos**: Asignar automáticamente los participantes inscritos a dos equipos (Equipo A y Equipo B).
+- **Interfaz Responsiva**: El diseño se adapta a diferentes tamaños de pantalla, desde móviles a ordenadores de escritorio, gracias a Bootstrap.
+- **Feedback al Usuario**: Alertas visuales para confirmar acciones como la creación de eventos o la inscripción de usuarios.
+- **ID Únicos**: El backend genera un ID numérico único de 4 dígitos para cada evento y usuario, evitando colisiones.
 
-Solución
+## Arquitectura del Proyecto
 
-Desarrollar un programa en Python que permita gestionar estos eventos, inscripciones y equipos de manera eficiente. Debe incluir funciones para registrar eventos, inscribir participantes, consultar el estado de un evento, y asignar equipos de forma automática.
+La aplicación sigue una arquitectura cliente-servidor desacoplada.
 
-## Requerimientos
+### Backend
 
-Crear un sistema donde puedan:
+- **Framework**: FastAPI.
+- **Lógica de Negocio**: La clase `GestorEventos` en `src/services.py` centraliza toda la lógica, incluyendo la generación de IDs únicos para evitar duplicados.
+- **Modelos de Datos**: Las clases en `src/models.py` usan Pydantic para la validación de datos.
+- **Persistencia**: Los datos se guardan en ficheros `eventos.json` y `usuarios.json` en el directorio `data/`.
 
-### Eventos
+### Frontend
 
-Registrar eventos deportivos (nombre, fecha, tipo de evento, estado).
+- **Tecnologías**: HTML, CSS, JavaScript y Bootstrap 5.
+- **Interfaz de Usuario**: El diseño se basa en tarjetas para mostrar los eventos y utiliza un modal para los detalles, inscripciones y asignación de equipos.
+- **Interactividad**: El fichero `js/main.js` maneja las llamadas a la API, la actualización dinámica del DOM y la gestión de eventos del usuario.
 
-Inscribir usuarios para cada evento. // toma las funciones de crear usuario o usuarios creados
+## Estructura de Datos (JSON)
 
-Asignar usuarios a equipos. // reparte la cantidad de usuarios a los 2 equipos 
+Los datos se almacenan en un formato JSON limpio y legible.
 
-Consultar los eventos por estado.
+### `eventos.json`
 
-### Usuario
+```json
+[
+    {
+        "id_evento": "1234",
+        "nombre": "Torneo de Voleibol",
+        "fecha": "2025-08-15",
+        "tipo_evento": "Voleibol",
+        "estado": "Pendiente",
+        "participantes_inscritos": ["5678"],
+        "participantes_confirmados": [],
+        "equipos": {}
+    }
+]
+```
 
-Gestionar la información de los participantes.
+### `usuarios.json`
 
-Administrar el proceso de inscripción y asignación de equipos.
+```json
+[
+    {
+        "id_usuario": "5678",
+        "nombre": "Ana García"
+    }
+]
+```
 
-## opcional
+## Cómo Ejecutar la Aplicación
 
-front para visualizar la app 
+1.  **Backend**:
+    - Navega al directorio `backend`.
+    - Instala las dependencias: `pip install -r requirements.txt`.
+    - Inicia el servidor: `uvicorn main:app --reload`.
+    - La API estará disponible en `http://127.0.0.1:8000`.
 
-----------------------------------------------------------------------------------------------------
+2.  **Frontend**:
+    - Abre el fichero `frontend/index.html` en tu navegador web.
 
-## Tareas específicas
-
-Crear las clases necesarias para representar un evento deportivo, un participante y un equipo.
-
-Crear listas y diccionarios para almacenar los eventos y participantes.
-
-Implementar funciones que permitan la inscripción de participantes y la asignación de equipos.
-
-Implementar las instrucciones if, for, while, y las sentencias break y continue para realizar las verificaciones necesarias.
-
-## Ejecución
-
-Trabajo grupal, en el que cada miembro se encargará de una parte del sistema.
-
-Deberán entregar el código fuente en un archivo comprimido ZIP con el nombre "EventoDeportivo_grupoX" (donde X
