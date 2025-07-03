@@ -46,6 +46,70 @@ class GestorEventos:
     # --- Tareas para el Rol 2: Desarrollador de Eventos ---
     def registrar_evento(self, nombre, fecha, tipo_evento):
         # El código será implementado por el Desarrollador de Eventos
+
+        eventos_deportivos = {}
+
+        print("\nBienvenido al Gestor Deportivo\n")
+
+        while True:
+            print("\nIngrese una de las siguientes opciones:\n")
+            print("1. Agregar Nuevo Evento.")
+            print("2. Ver Eventos Registrados.")
+            print("3. Agregar Nuevo Participante.")
+
+            opcion = int(input())
+
+            if opcion == 1:
+
+                print("\nIngrese los siguientes Datos del Evento:")
+
+                descripcion_evento = {}
+
+                nombre = input("Nombre: ").strip()
+
+                if nombre in eventos_deportivos:
+                    print(f"El nombre del evento {nombre} ya esta registrado, por favor ingrese uno nuevo." )
+                    continue
+
+                fecha = input("Fecha (ej. DD-MM-AA): ").strip()
+                descripcion_evento["Fecha"] = fecha
+            
+                tipo_evento = input("Tipo de Evento (ej. Futbol, Tenis, etc): ").strip()
+                descripcion_evento["Tipo Evento"] = tipo
+            
+                estado = input("Estado (Confirmado, En proceso, Cancelado): ").strip().lower()
+                
+                if estado not in ["confirmado", "en proceso", "cancelado"]:
+                    print("\nPor favor ingresar el Estado en en su formato válido. 'Confirmado, 'En Proceso', 'Cancelado'\n")
+                    continue
+                descripcion_evento["Estado"] = estado
+
+                eventos_deportivos[nombre] = descripcion_evento
+                print(f"\nEvento {nombre} fue agregado exitosamente.")
+            
+            elif opcion == 2:
+
+                if not eventos_deportivos:
+                    print("No hay Eventos Deportivos Registrados")
+                    continue
+                
+                else:
+                    for nombre, datos_evento in eventos_deportivos.items():
+                        print(f"\nEvento: {nombre_evento}")
+                        print(f"  Fecha: {datos_evento['Fecha']}")
+                        print(f"  Tipo: {datos_evento['Tipo Evento']}")
+                        print(f"  Estado: {datos_evento['Estado']}")
+
+            if opcion == 3:
+                continue
+                print("Ingrese los Datos del Nuevo Participante")
+
+    if __name__ == "__main__":
+        registrar_evento()
+
+
+
+
         pass
 
     def consultar_eventos_por_estado(self, estado):
