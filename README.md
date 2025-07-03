@@ -74,4 +74,3 @@ Los datos se almacenan en un formato JSON limpio y legible.
 2.  **Frontend**:
     - Abre el fichero `frontend/index.html` en tu navegador web.
 
-Con esto, la aplicación estará completamente funcional y lista para ser utilizada.
