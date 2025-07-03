@@ -1,27 +1,45 @@
-## aqui definimos la estructura de los objetos que vamos a usar
-import uuid # Para generar IDs únicos para eventos y usuarios
+from enum import Enum
+from typing import List, Dict
+from pydantic import BaseModel, Field
 
-class Usuario:
+class EstadoEvento(Enum):
+    PENDIENTE = "Pendiente"
+    CONFIRMADO = "Confirmado"
+    EN_PROCESO = "En Proceso"
+    CANCELADO = "Cancelado"
+
+class TipoEvento(Enum):
+    FUTBOL = "Fútbol"
+    BALONCESTO = "Baloncesto"
+    VOLEIBOL = "Voleibol"
+    TENIS = "Tenis"
+    OTRO = "Otro"
+
+class Usuario(BaseModel):
     """Representa a un participante del evento."""
-    def __init__(self, nombre):
-        self.id_usuario = str(uuid.uuid4())[:4] # ID único de 4 caracteres
-        self.nombre = nombre
+    id_usuario: str
+    nombre: str
 
-    def __repr__(self):
-        # Esta es una forma útil de imprimir la información del objeto
-        return f"Usuario(ID: {self.id_usuario}, Nombre: {self.nombre})"
+    class Config:
+        from_attributes = True
 
-class Evento:
+class Evento(BaseModel):
     """Representa un evento deportivo."""
-    def __init__(self, nombre, fecha, tipo_evento):
-        self.id_evento = str(uuid.uuid4())[:4] # ID único de 4 caracteres
-        self.nombre = nombre
-        self.fecha = fecha
-        self.tipo_evento = tipo_evento
-        self.estado = "Pendiente"  # Estados posibles: Pendiente, Confirmado, En Proceso, Cancelado
-        self.participantes_inscritos = [] # Lista de IDs de usuarios inscritos
-        self.participantes_confirmados = [] # Lista de IDs de usuarios con asistencia confirmada
-        self.equipos = {} # Diccionario para almacenar los equipos. Ej: {"Equipo A": [], "Equipo B": []}
+    id_evento: str
+    nombre: str
+    fecha: str
+    tipo_evento: str
+    estado: str = EstadoEvento.PENDIENTE.value
+    participantes_inscritos: List[str] = Field(default_factory=list)
+    participantes_confirmados: List[str] = Field(default_factory=list)
+    equipos: Dict[str, List[str]] = Field(default_factory=dict)
 
-    def __repr__(self):
-        return f"Evento(ID: {self.id_evento}, Nombre: '{self.nombre}', Estado: {self.estado})"
+    def actualizar_estado(self, nuevo_estado: str) -> bool:
+        """Actualiza el estado del evento si es válido."""
+        if nuevo_estado in [e.value for e in EstadoEvento]:
+            self.estado = nuevo_estado
+            return True
+        return False
+
+    class Config:
+        from_attributes = True
